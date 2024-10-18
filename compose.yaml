@@ -1,0 +1,30 @@
+services:
+  rabbit:
+    container_name: rabbitmq
+    image: rabbitmq
+    ports:
+      - 5672:5672
+    networks:
+      - Maj
+
+  con:
+    deploy:
+      replicas: 3
+    build: ./Con
+    depends_on:
+      - rabbit
+    networks:
+      - Maj
+
+  pub:
+    container_name: pub
+    build: ./Pub
+    depends_on:
+      - rabbit
+      - con
+    networks:
+      - Maj
+
+networks:
+  Maj:
+    name: Maj

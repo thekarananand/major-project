@@ -5,26 +5,30 @@ services:
     ports:
       - 5672:5672
     networks:
-      - Maj
+      - project1
 
-  con:
+  consumer:
     deploy:
       replicas: 3
-    build: ./Con
+    build: ./Consumer
     depends_on:
       - rabbit
     networks:
-      - Maj
+      - project1
+    restart: unless-stopped
 
-  pub:
-    container_name: pub
-    build: ./Pub
+  publisher:
+    container_name: publisher
+    build: ./Publisher
     depends_on:
       - rabbit
-      - con
+      - consumer
     networks:
-      - Maj
+      - project1
+    ports:
+      - 8000:80
+    restart: unless-stopped
 
 networks:
-  Maj:
-    name: Maj
+  project1:
+    name: project1

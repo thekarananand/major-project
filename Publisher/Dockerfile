@@ -6,6 +6,6 @@ WORKDIR /opt/MajorProject/
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "Pub.py"]
+EXPOSE 80
 
-# CMD ["fastapi", "run", "main.py", "--port", "80"]
+CMD ["fastapi", "run", "main.py", "--port", "80"]

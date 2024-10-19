@@ -6,4 +6,4 @@ WORKDIR /opt/MajorProject/
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "Con.py"]
+CMD ["python", "main.py"]

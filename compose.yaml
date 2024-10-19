@@ -25,9 +25,17 @@ services:
       - consumer
     networks:
       - project1
-    ports:
-      - 8000:80
     restart: unless-stopped
+
+  nginx:
+    container_name: nginx
+    build: ./NGINX
+    depends_on:
+      - publisher
+    networks:
+      - project1
+    ports:
+        - 8000:80
 
 networks:
   project1:

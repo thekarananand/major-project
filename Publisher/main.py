@@ -1,6 +1,5 @@
 from fastapi  import FastAPI
 from pydantic import BaseModel
-from starlette.types import Message
 from .RabbitMQ import RabbitMQ
 import logging, json
 

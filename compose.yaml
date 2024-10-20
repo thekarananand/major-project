@@ -20,6 +20,7 @@ services:
   publisher:
     container_name: publisher
     build: ./Publisher
+    # build: ./SignalGenerator
     depends_on:
       - rabbit
       - consumer
@@ -27,15 +28,24 @@ services:
       - project1
     restart: unless-stopped
 
-  nginx:
-    container_name: nginx
-    build: ./NGINX
+  apiserver:
+    build: ./APIServer
     depends_on:
-      - publisher
+      - rabbit
+      - consumer
+    networks:
+      - project1
+    restart: unless-stopped
+    ports:
+      - 1600:80
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
     networks:
       - project1
     ports:
-        - 8000:80
+      - 800:27017
 
 networks:
   project1:
